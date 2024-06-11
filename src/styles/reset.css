@@ -8,6 +8,7 @@ h6,
 p,
 ol,
 ul {
+  font-size: inherit;
   margin: 0;
   padding: 0;
 }
@@ -15,6 +16,10 @@ ul {
 ol,
 ul {
   list-style: none;
+}
+
+a {
+  text-decoration: none;
 }
 
 img {

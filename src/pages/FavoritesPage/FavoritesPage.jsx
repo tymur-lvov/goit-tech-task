@@ -1,4 +1,4 @@
-const Favorites = () => {
+const FavoritesPage = () => {
   return (
     <>
       <h1>Favorites</h1>
@@ -6,4 +6,4 @@ const Favorites = () => {
   );
 };
 
-export default Favorites;
+export default FavoritesPage;

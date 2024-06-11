@@ -1,4 +1,4 @@
-const Catalog = () => {
+const CatalogPage = () => {
   return (
     <>
       <h1>Catalog</h1>
@@ -6,4 +6,4 @@ const Catalog = () => {
   );
 };
 
-export default Catalog;
+export default CatalogPage;
