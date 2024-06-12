@@ -11,7 +11,9 @@ const Layout = ({ children }) => {
         </div>
       </header>
       <main>
-        <div className="container">{children}</div>
+        <section className={css.section}>
+          <div className="container">{children}</div>
+        </section>
       </main>
     </>
   );

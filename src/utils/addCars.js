@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import cars from "../../assets/adsCars.json";
+import cars from "../assets/adsCars.json";
 
 export const addCars = () => {
   cars.forEach((car) =>

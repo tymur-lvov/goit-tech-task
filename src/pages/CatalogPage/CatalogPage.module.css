@@ -1,0 +1,24 @@
+.list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px 14px;
+}
+
+@media only screen and (min-width: 1280px) {
+  .list {
+    gap: 50px 29px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .item {
+    flex-basis: calc((100% - 14px) / 2);
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .item {
+    flex-basis: calc((100% - 87px) / 4);
+  }
+}

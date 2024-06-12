@@ -1,3 +1,13 @@
 .header {
   background-color: var(--accent);
 }
+
+.section {
+  padding: 15px 0;
+}
+
+@media only screen and (min-width: 1280px) {
+  .section {
+    padding: 30px 0;
+  }
+}

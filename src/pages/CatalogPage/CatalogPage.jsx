@@ -7,6 +7,8 @@ import CardItem from "../../components/CardItem/CardItem";
 import { selectCatalog } from "../../redux/auto/autosSelectors";
 import { fetchCatalogThunk } from "../../redux/auto/autosOperations";
 
+import css from "./CatalogPage.module.css";
+
 const CatalogPage = () => {
   const catalog = useSelector(selectCatalog);
   const dispatch = useDispatch();
@@ -20,11 +22,11 @@ const CatalogPage = () => {
       {catalog.length === 0 && <Loader />}
       {catalog.length > 0 && (
         <>
-          <ul>
-            {catalog.map((auto, idx) => {
+          <ul className={css.list}>
+            {catalog.map((auto) => {
               return (
-                <li key={idx}>
-                  <CardItem />
+                <li className={css.item} key={auto.id}>
+                  <CardItem auto={auto} />
                 </li>
               );
             })}
