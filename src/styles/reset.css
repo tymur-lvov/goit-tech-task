@@ -8,8 +8,6 @@ h6,
 p,
 ol,
 ul {
-  font-size: inherit;
-  font-weight: inherit;
   margin: 0;
   padding: 0;
 }
