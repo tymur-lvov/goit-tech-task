@@ -6,6 +6,7 @@ import { selectFavorites } from "../../redux/auto/autosSelectors";
 import { sliceCity, sliceCountry } from "../../utils/sliceAddress";
 
 import css from "./CardItem.module.css";
+import Icon from "../Icon/Icon";
 
 const CardItem = ({ auto, handleClick }) => {
   const favorites = useSelector(selectFavorites);
@@ -29,7 +30,8 @@ const CardItem = ({ auto, handleClick }) => {
     <>
       <div className={css.thumb}>
         <img src={photoLink || img} alt={`${make} ${model}`} />
-        <svg
+        <Icon className={css.icon} id="icon-heart" width={18} height={18} />
+        {/* <svg
           className={clsx(css.icon, {
             [css.active]: favorites.some((auto) => auto.id === id),
           })}
@@ -38,7 +40,7 @@ const CardItem = ({ auto, handleClick }) => {
           width={18}
         >
           <use href={`${icons}#icon-heart`}></use>
-        </svg>
+        </svg> */}
       </div>
       <div className={css.content_wrapper}>
         <div className={css.title_wrapper}>
