@@ -5,12 +5,18 @@
 
 .link {
   color: var(--accent-text);
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
 
   transition: border 800ms linear;
   position: relative;
   padding: 12px 0;
+}
+
+@media only screen and (min-width: 1280px) {
+  .link {
+    font-size: 24px;
+  }
 }
 
 .link::after {
