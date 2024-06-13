@@ -1,4 +1,5 @@
 import icons from "../../assets/icons/icons.svg";
+import { sliceCity, sliceCountry } from "../../utils/sliceAddress";
 
 import css from "./CardItem.module.css";
 
@@ -32,13 +33,13 @@ const CardItem = ({ auto }) => {
           <span className={css.price}>{rentalPrice}</span>
         </div>
         <ul className={css.list}>
-          <li>{address}</li>
-          <li>{address}</li>
-          <li>{rentalCompany}</li>
-          <li>{type}</li>
-          <li>{model}</li>
-          <li>{id}</li>
-          <li>{accessories[0]}</li>
+          <li className={css.item}>{sliceCity(address)}</li>
+          <li className={css.item}>{sliceCountry(address)}</li>
+          <li className={css.item}>{rentalCompany}</li>
+          <li className={css.item}>{type}</li>
+          <li className={css.item}>{model}</li>
+          <li className={css.item}>{id}</li>
+          <li className={css.item}>{accessories[0]}</li>
         </ul>
         <button className={css.button} type="button">
           Learn more

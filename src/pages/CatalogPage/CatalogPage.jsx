@@ -17,11 +17,6 @@ const CatalogPage = () => {
     dispatch(fetchCatalogThunk());
   }, [dispatch]);
 
-  const str = "123 Example Street, Kiev, Ukraine";
-  const idx = str.indexOf(",");
-  console.log(idx);
-  console.log(str.slice(idx + 2, str.length));
-
   return (
     <>
       {catalog.length === 0 && <Loader />}

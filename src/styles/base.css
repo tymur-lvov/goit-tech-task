@@ -16,6 +16,7 @@
 
   --tag-text: #363535;
   --tag-backgr: #f9f9f9;
+  --tag-border: rgba(18, 20, 23, 0.1);
 }
 
 body {

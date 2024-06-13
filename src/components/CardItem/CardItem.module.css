@@ -35,13 +35,20 @@
   margin-bottom: 8px;
 }
 
+.title {
+  width: 230px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .title,
 .price {
+  color: var(--primary-color);
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
-  color: var(--primary-color);
 }
 
 .accent {
@@ -49,9 +56,29 @@
 }
 
 .list {
+  width: 100%;
+  height: 40px;
   display: flex;
   flex-wrap: wrap;
+  gap: 4px 6px;
+  overflow: hidden;
+
   margin-bottom: 28px;
+}
+
+.item {
+  position: relative;
+}
+
+.item:not(:nth-child(4n), :last-child)::after {
+  background-color: var(--tag-border);
+  content: "";
+  display: block;
+  height: 100%;
+  width: 1px;
+  top: 0;
+  right: -3px;
+  position: absolute;
 }
 
 .button {
