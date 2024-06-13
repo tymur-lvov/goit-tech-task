@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 
-import icons from "../../assets/icons/icons.svg";
+// import icons from "../../assets/icons/icons.svg";
 import { selectFavorites } from "../../redux/auto/autosSelectors";
 import { sliceCity, sliceCountry } from "../../utils/sliceAddress";
 
