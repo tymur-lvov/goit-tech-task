@@ -27,7 +27,11 @@ const autosSlice = createSlice({
     builder
       .addCase(fetchCatalogThunk.fulfilled, (state, { payload }) => {
         state.isLimit = false;
+        state.isLoading = false;
         state.catalog = payload;
+      })
+      .addCase(fetchCatalogThunk.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(fetchMoreAutosThunk.fulfilled, (state, { payload }) => {
         if (payload.length === 0) {
