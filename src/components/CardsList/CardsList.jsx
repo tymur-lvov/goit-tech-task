@@ -19,7 +19,7 @@ const CardsList = ({ catalog, favorites }) => {
     console.log(id);
   };
 
-  const handleAddToFavoritesClick = (id) => {
+  const toggleAddToFavoritesClick = (id) => {
     if (savedFavorites.some((auto) => auto.id === id)) {
       dispatch(removeFromFavorites(id));
       return;
@@ -35,7 +35,7 @@ const CardsList = ({ catalog, favorites }) => {
               auto={auto}
               handleClick={{
                 handleLearnMoreClick,
-                handleAddToFavoritesClick,
+                toggleAddToFavoritesClick,
               }}
             />
           </li>

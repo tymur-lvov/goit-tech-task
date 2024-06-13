@@ -23,7 +23,7 @@ const CardItem = ({ auto, handleClick }) => {
     photoLink,
   } = auto;
 
-  const { handleAddToFavoritesClick, handleLearnMoreClick } = handleClick;
+  const { toggleAddToFavoritesClick, handleLearnMoreClick } = handleClick;
 
   return (
     <>
@@ -33,7 +33,7 @@ const CardItem = ({ auto, handleClick }) => {
           className={clsx(css.icon, {
             [css.active]: favorites.some((auto) => auto.id === id),
           })}
-          onClick={() => handleAddToFavoritesClick(id)}
+          onClick={() => toggleAddToFavoritesClick(id)}
           height={18}
           width={18}
         >
