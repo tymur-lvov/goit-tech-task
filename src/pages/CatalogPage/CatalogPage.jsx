@@ -38,3 +38,6 @@ const CatalogPage = () => {
 };
 
 export default CatalogPage;
+
+// import { addCars } from "../../utils/addCars";
+// addCars();

@@ -15,12 +15,13 @@ const CardItem = ({ auto }) => {
     rentalCompany,
     type,
     accessories,
+    photoLink,
   } = auto;
 
   return (
     <>
       <div className={css.thumb}>
-        <img src={img} alt={`${make} ${model}`} />
+        <img src={photoLink || img} alt={`${make} ${model}`} />
         <svg className={css.icon} height={18} width={18}>
           <use href={`${icons}#icon-heart`}></use>
         </svg>
