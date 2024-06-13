@@ -3,7 +3,7 @@ import { sliceCity, sliceCountry } from "../../utils/sliceAddress";
 
 import css from "./CardItem.module.css";
 
-const CardItem = ({ auto }) => {
+const CardItem = ({ auto, handleClick }) => {
   const {
     img,
     id,
@@ -42,7 +42,11 @@ const CardItem = ({ auto }) => {
           <li className={css.item}>{id}</li>
           <li className={css.item}>{accessories[0]}</li>
         </ul>
-        <button className={css.button} type="button">
+        <button
+          className={css.button}
+          onClick={() => handleClick(id)}
+          type="button"
+        >
           Learn more
         </button>
       </div>

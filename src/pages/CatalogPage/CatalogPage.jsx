@@ -17,6 +17,14 @@ const CatalogPage = () => {
     dispatch(fetchCatalogThunk());
   }, [dispatch]);
 
+  const handleLearnMoreClick = (id) => {
+    console.log(id);
+  };
+
+  const handleLoadMoreClick = () => {
+    console.log("Loading more...");
+  };
+
   return (
     <>
       {catalog.length === 0 && <Loader />}
@@ -26,11 +34,14 @@ const CatalogPage = () => {
             {catalog.map((auto) => {
               return (
                 <li className={css.item} key={auto.id}>
-                  <CardItem auto={auto} />
+                  <CardItem auto={auto} handleClick={handleLearnMoreClick} />
                 </li>
               );
             })}
           </ul>
+          <button className={css.button} onClick={handleLoadMoreClick}>
+            Load more
+          </button>
         </>
       )}
     </>
