@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 
-import icons from "../../assets/icons/icons.svg";
+import imageUrl from "../../assets/icons/icons.svg";
 import { selectFavorites } from "../../redux/auto/autosSelectors";
 import { sliceCity, sliceCountry } from "../../utils/sliceAddress";
 
@@ -37,7 +37,7 @@ const CardItem = ({ auto, handleClick }) => {
           height={18}
           width={18}
         >
-          <use href={`${icons}#icon-heart`}></use>
+          <use href={`${imageUrl}#icon-heart`}></use>
         </svg>
       </div>
       <div className={css.content_wrapper}>
