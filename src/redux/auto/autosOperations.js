@@ -18,3 +18,20 @@ export const fetchCatalogThunk = createAsyncThunk(
     }
   }
 );
+
+export const fetchMoreAutosThunk = createAsyncThunk(
+  "autos/fetchMoreAutos",
+  async (page, thunkApi) => {
+    try {
+      const { data } = await mockApi.get("advert/", {
+        params: {
+          page,
+          limit: 12,
+        },
+      });
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

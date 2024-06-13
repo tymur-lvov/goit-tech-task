@@ -1,9 +1,14 @@
+import clsx from "clsx";
+import { useSelector } from "react-redux";
+
 import icons from "../../assets/icons/icons.svg";
+import { selectFavorites } from "../../redux/auto/autosSelectors";
 import { sliceCity, sliceCountry } from "../../utils/sliceAddress";
 
 import css from "./CardItem.module.css";
 
 const CardItem = ({ auto, handleClick }) => {
+  const favorites = useSelector(selectFavorites);
   const {
     img,
     id,
@@ -18,11 +23,20 @@ const CardItem = ({ auto, handleClick }) => {
     photoLink,
   } = auto;
 
+  const { handleAddToFavoritesClick, handleLearnMoreClick } = handleClick;
+
   return (
     <>
       <div className={css.thumb}>
         <img src={photoLink || img} alt={`${make} ${model}`} />
-        <svg className={css.icon} height={18} width={18}>
+        <svg
+          className={clsx(css.icon, {
+            [css.active]: favorites.some((auto) => auto.id === id),
+          })}
+          onClick={() => handleAddToFavoritesClick(id)}
+          height={18}
+          width={18}
+        >
           <use href={`${icons}#icon-heart`}></use>
         </svg>
       </div>
@@ -44,7 +58,7 @@ const CardItem = ({ auto, handleClick }) => {
         </ul>
         <button
           className={css.button}
-          onClick={() => handleClick(id)}
+          onClick={() => handleLearnMoreClick(id)}
           type="button"
         >
           Learn more

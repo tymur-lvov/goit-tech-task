@@ -1,28 +1,51 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "../../components/Loader/Loader";
 import CardItem from "../../components/CardItem/CardItem";
 
-import { selectCatalog } from "../../redux/auto/autosSelectors";
-import { fetchCatalogThunk } from "../../redux/auto/autosOperations";
+import {
+  selectCatalog,
+  selectFavorites,
+  selectIsLimit,
+} from "../../redux/auto/autosSelectors";
+import {
+  addToFavorites,
+  removeFromFavorites,
+} from "../../redux/auto/autosSlice";
+import {
+  fetchCatalogThunk,
+  fetchMoreAutosThunk,
+} from "../../redux/auto/autosOperations";
 
 import css from "./CatalogPage.module.css";
 
 const CatalogPage = () => {
   const catalog = useSelector(selectCatalog);
+  const favorites = useSelector(selectFavorites);
+  const isLimit = useSelector(selectIsLimit);
+  const currentPage = useRef(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCatalogThunk());
   }, [dispatch]);
 
+  const handleLoadMoreClick = () => {
+    currentPage.current++;
+    dispatch(fetchMoreAutosThunk(currentPage.current));
+  };
+
   const handleLearnMoreClick = (id) => {
     console.log(id);
   };
 
-  const handleLoadMoreClick = () => {
-    console.log("Loading more...");
+  const handleAddToFavoritesClick = (id) => {
+    if (favorites.some((auto) => auto.id === id)) {
+      dispatch(removeFromFavorites(id));
+      return;
+    }
+    dispatch(addToFavorites(id));
   };
 
   return (
@@ -34,14 +57,22 @@ const CatalogPage = () => {
             {catalog.map((auto) => {
               return (
                 <li className={css.item} key={auto.id}>
-                  <CardItem auto={auto} handleClick={handleLearnMoreClick} />
+                  <CardItem
+                    auto={auto}
+                    handleClick={{
+                      handleLearnMoreClick,
+                      handleAddToFavoritesClick,
+                    }}
+                  />
                 </li>
               );
             })}
           </ul>
-          <button className={css.button} onClick={handleLoadMoreClick}>
-            Load more
-          </button>
+          {!isLimit && (
+            <button className={css.button} onClick={handleLoadMoreClick}>
+              Load more
+            </button>
+          )}
         </>
       )}
     </>
