@@ -10,26 +10,47 @@ const SearchForm = () => {
   const catalog = useSelector(selectCatalog);
 
   const createBrandOptions = (catalog) => {
-    const brandOptions = catalog.map((auto) => {
+    const autoModels = catalog.map((auto) => auto.model);
+
+    const rawBrandOptions = catalog.map((auto) => auto.make);
+
+    const brandDublicates = rawBrandOptions.filter((option, index, self) =>
+      self.indexOf(option) !== index ? option : null
+    );
+
+    const uniqueBrandOptions = rawBrandOptions.map((option, index) =>
+      brandDublicates.includes(option)
+        ? (option = `${option} ${autoModels[index]}`)
+        : option
+    );
+
+    const brandOptions = uniqueBrandOptions.map((option) => {
       return {
-        value: auto.make.toLowerCase(),
-        label: auto.make,
+        value: option.toLowerCase(),
+        label: option,
       };
     });
     return brandOptions;
   };
-  createBrandOptions(catalog);
 
   const createPriceOptions = (catalog) => {
-    const priceOptions = catalog.map((auto) => {
+    const rawPriceOptions = catalog.map((auto) =>
+      auto.rentalPrice.slice(1, auto.rentalPrice.length)
+    );
+
+    const filteredPriceOptions = rawPriceOptions.filter(
+      (item, index, self) => self.indexOf(item) === index
+    );
+    const sortedPriceOptions = filteredPriceOptions.toSorted((a, b) => a - b);
+
+    const priceOptions = sortedPriceOptions.map((option) => {
       return {
-        value: auto.rentalPrice,
-        label: auto.rentalPrice,
+        value: option,
+        label: option,
       };
     });
     return priceOptions;
   };
-  createPriceOptions(catalog);
 
   const initialValues = {
     brand: "",
@@ -105,6 +126,7 @@ const SearchForm = () => {
             border: "1px solid rgba(18, 20, 23, 0.05)",
             borderRadius: 14,
             padding: "14px 18px",
+            paddingRight: 8,
             margin: 0,
           }),
           menuList: (baseStyles) => ({
@@ -115,10 +137,26 @@ const SearchForm = () => {
             display: "flex",
             flexDirection: "column",
             gap: 8,
+            maxHeight: 272,
+            overflowY: "auto",
+            "&::-webkit-scrollbar": {
+              width: 8,
+            },
+            "&::-webkit-scrollbar-thumb": {
+              height: 130,
+              borderRadius: 10,
+              backgroundColor: "rgba(18, 20, 23, 0.05)",
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              background: "rgba(18, 20, 23, 0.07)",
+            },
           }),
           option: (baseStyles, state) => ({
             padding: 0,
             color: state.isSelected ? "#121417" : "rgba(18, 20, 23, 0.2)",
+            "&:hover": {
+              color: state.isSelected ? "#121417" : "rgba(18, 20, 23, 0.4)",
+            },
           }),
         }}
       />
