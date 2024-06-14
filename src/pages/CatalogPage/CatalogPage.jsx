@@ -26,8 +26,10 @@ const CatalogPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCatalogThunk());
-  }, [dispatch]);
+    if (catalog.length === 0) {
+      dispatch(fetchCatalogThunk());
+    }
+  }, [catalog.length, dispatch]);
 
   const handleLoadMoreClick = () => {
     currentPage.current++;
