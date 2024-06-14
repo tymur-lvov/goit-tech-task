@@ -1,6 +1,6 @@
 export const initialValues = {
-  brand: "",
-  price: "",
+  make: "",
+  rentalPrice: "",
   from: "",
   to: "",
 };

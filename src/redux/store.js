@@ -17,7 +17,7 @@ const persistConfig = {
   key: "autos",
   version: 1,
   storage,
-  whitelist: ["catalog", "favorites"],
+  whitelist: ["catalog", "refCatalog", "favorites", "value"],
 };
 
 export const store = configureStore({

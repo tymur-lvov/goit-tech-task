@@ -35,3 +35,35 @@ export const fetchMoreAutosThunk = createAsyncThunk(
     }
   }
 );
+
+export const fetchAutosByBrandThunk = createAsyncThunk(
+  "autos/fetchAutosByBrand",
+  async (make, thunkApi) => {
+    try {
+      const { data } = await mockApi.get("advert/", {
+        params: {
+          make,
+        },
+      });
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchAutosByPriceThunk = createAsyncThunk(
+  "autos/fetchAutosByPriceThunk",
+  async (rentalPrice, thunkApi) => {
+    try {
+      const { data } = await mockApi.get("advert/", {
+        params: {
+          rentalPrice,
+        },
+      });
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

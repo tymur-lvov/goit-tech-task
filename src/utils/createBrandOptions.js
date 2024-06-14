@@ -14,8 +14,11 @@ export const createBrandOptions = (catalog) => {
   );
 
   const brandOptions = uniqueBrandOptions.map((option) => {
+    const index = option.indexOf(" ");
     return {
-      value: option.toLowerCase(),
+      value: option.includes(" ")
+        ? option.toLowerCase().slice(0, index)
+        : option.toLowerCase(),
       label: option,
     };
   });

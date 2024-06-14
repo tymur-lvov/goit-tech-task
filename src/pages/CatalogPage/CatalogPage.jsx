@@ -6,30 +6,31 @@ import CardsList from "../../components/CardsList/CardsList";
 import SearchForm from "../../components/SearchForm/SearchForm";
 
 import {
-  selectCatalog,
-  selectIsLimit,
-  selectIsLoading,
-} from "../../redux/auto/autosSelectors";
-import {} from "../../redux/auto/autosSlice";
-import {
   fetchCatalogThunk,
   fetchMoreAutosThunk,
 } from "../../redux/auto/autosOperations";
+import {
+  selectCatalog,
+  selectIsLimit,
+  selectIsLoading,
+  selectRefCatalog,
+} from "../../redux/auto/autosSelectors";
 
 import css from "./CatalogPage.module.css";
 
 const CatalogPage = () => {
   const catalog = useSelector(selectCatalog);
+  const refCatalog = useSelector(selectRefCatalog);
   const isLimit = useSelector(selectIsLimit);
   const isLoading = useSelector(selectIsLoading);
   const currentPage = useRef(1);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (catalog.length === 0) {
+    if (catalog.length === 0 || refCatalog.length === 0) {
       dispatch(fetchCatalogThunk());
     }
-  }, [catalog.length, dispatch]);
+  }, [catalog.length, refCatalog.length, dispatch]);
 
   const handleLoadMoreClick = () => {
     currentPage.current++;
@@ -43,11 +44,12 @@ const CatalogPage = () => {
       {!isLoading && (
         <>
           <CardsList catalog={catalog} />
-          {!isLimit && (
-            <button className={css.button} onClick={handleLoadMoreClick}>
-              Load more
-            </button>
-          )}
+          {!isLimit ||
+            (catalog.length > 12 && (
+              <button className={css.button} onClick={handleLoadMoreClick}>
+                Load more
+              </button>
+            ))}
         </>
       )}
     </>
@@ -55,6 +57,3 @@ const CatalogPage = () => {
 };
 
 export default CatalogPage;
-
-// import { addCars } from "../../utils/addCars";
-// addCars();

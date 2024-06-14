@@ -69,6 +69,7 @@
   width: 136px;
   height: 48px;
   border: none;
+  outline: none;
   cursor: pointer;
   border-radius: 12px;
   padding: 14px 44px;

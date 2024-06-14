@@ -1,18 +1,27 @@
 import Select from "react-select";
+import { useDispatch, useSelector } from "react-redux";
 
+import { saveValue } from "../../redux/auto/autosSlice";
+import { selectValue } from "../../redux/auto/autosSelectors";
 import { selectStyles } from "../../data/selectStyles";
 
 const CustomSelect = ({ field, form, options, placeholder }) => {
+  const dispatch = useDispatch();
+  const savedValue = useSelector(selectValue);
+
   const handleChange = (selectedOption) => {
-    form.setFieldValue(field.name, selectedOption);
+    dispatch(saveValue(selectedOption.value));
+    form.setFieldValue(field.name, selectedOption.value);
   };
+
+  const selectedOption = options.find((option) => option.value === savedValue);
 
   return (
     <>
       <Select
         name={field.name}
         placeholder={placeholder}
-        value={options.find((option) => option.value === field.value)}
+        value={selectedOption}
         onChange={handleChange}
         options={options}
         styles={selectStyles}

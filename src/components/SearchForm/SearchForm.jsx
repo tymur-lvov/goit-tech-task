@@ -1,25 +1,32 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 
 import CustomSelect from "../CustomSelect/CustomSelect";
 
-import { selectCatalog } from "../../redux/auto/autosSelectors";
 import { initialValues } from "../../data/initialValues";
+import { selectRefCatalog } from "../../redux/auto/autosSelectors";
 import { createPriceOptions } from "../../utils/createPriceOptions";
 import { createBrandOptions } from "../../utils/createBrandOptions";
+import {
+  fetchAutosByBrandThunk,
+  fetchAutosByPriceThunk,
+} from "../../redux/auto/autosOperations";
 
 import css from "./SearchForm.module.css";
 
 const SearchForm = () => {
-  const catalog = useSelector(selectCatalog);
+  const refCatalog = useSelector(selectRefCatalog);
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values, action) => {
+    values.brand ? dispatch(fetchAutosByBrandThunk(values.brand)) : null;
+    values.price ? dispatch(fetchAutosByPriceThunk(values.price)) : null;
+    action.resetForm();
+  };
+
   return (
     <div>
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
-      >
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {() => (
           <Form className={css.form}>
             <label className={css.label}>
@@ -27,7 +34,7 @@ const SearchForm = () => {
               <Field
                 name="brand"
                 component={CustomSelect}
-                options={createBrandOptions(catalog)}
+                options={createBrandOptions(refCatalog)}
                 placeholder="Enter the text"
               />
             </label>
@@ -36,7 +43,7 @@ const SearchForm = () => {
               <Field
                 name="price"
                 component={CustomSelect}
-                options={createPriceOptions(catalog)}
+                options={createPriceOptions(refCatalog)}
                 placeholder="To $"
               />
             </label>
