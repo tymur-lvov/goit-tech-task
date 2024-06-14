@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Loader from "../../components/Loader/Loader";
 import CardsList from "../../components/CardsList/CardsList";
+import SearchForm from "../../components/SearchForm/SearchForm";
 
 import {
   selectCatalog,
@@ -35,6 +36,7 @@ const CatalogPage = () => {
 
   return (
     <>
+      <SearchForm />
       {isLoading && <Loader />}
       {!isLoading && (
         <>
