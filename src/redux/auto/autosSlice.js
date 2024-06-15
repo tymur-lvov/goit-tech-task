@@ -12,7 +12,6 @@ import {
 const initialState = {
   catalog: [],
   favorites: [],
-  refCatalog: [],
   auto: null,
   value: "",
   isLimit: false,
@@ -41,7 +40,6 @@ const autosSlice = createSlice({
         state.isLimit = false;
         state.isLoading = false;
         state.catalog = payload;
-        state.refCatalog = payload;
       })
       .addCase(fetchCatalogThunk.pending, (state) => {
         state.isLoading = true;

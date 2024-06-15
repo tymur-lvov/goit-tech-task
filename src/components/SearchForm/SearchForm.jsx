@@ -4,7 +4,7 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import CustomSelect from "../CustomSelect/CustomSelect";
 
 import { initialValues } from "../../data/initialValues";
-import { selectRefCatalog } from "../../redux/auto/autosSelectors";
+import { selectCatalog } from "../../redux/auto/autosSelectors";
 import { createPriceOptions } from "../../utils/createPriceOptions";
 import { createBrandOptions } from "../../utils/createBrandOptions";
 import {
@@ -15,7 +15,7 @@ import {
 import css from "./SearchForm.module.css";
 
 const SearchForm = () => {
-  const refCatalog = useSelector(selectRefCatalog);
+  const catalog = useSelector(selectCatalog);
   const dispatch = useDispatch();
 
   const handleSubmit = (values, action) => {
@@ -34,7 +34,7 @@ const SearchForm = () => {
               <Field
                 name="brand"
                 component={CustomSelect}
-                options={createBrandOptions(refCatalog)}
+                options={createBrandOptions(catalog)}
                 placeholder="Enter the text"
               />
             </label>
@@ -43,7 +43,7 @@ const SearchForm = () => {
               <Field
                 name="price"
                 component={CustomSelect}
-                options={createPriceOptions(refCatalog)}
+                options={createPriceOptions(catalog)}
                 placeholder="To $"
               />
             </label>
