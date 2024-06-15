@@ -36,38 +36,6 @@ export const fetchMoreAutosThunk = createAsyncThunk(
   }
 );
 
-export const fetchAutosByBrandThunk = createAsyncThunk(
-  "autos/fetchAutosByBrand",
-  async (make, thunkApi) => {
-    try {
-      const { data } = await mockApi.get("advert/", {
-        params: {
-          make,
-        },
-      });
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
-
-export const fetchAutosByPriceThunk = createAsyncThunk(
-  "autos/fetchAutosByPriceThunk",
-  async (rentalPrice, thunkApi) => {
-    try {
-      const { data } = await mockApi.get("advert/", {
-        params: {
-          rentalPrice,
-        },
-      });
-      return data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
-    }
-  }
-);
-
 export const fetchAutosByIdThunk = createAsyncThunk(
   "autos/fetchAutosByIdThunk",
   async (id, thunkApi) => {
@@ -76,6 +44,20 @@ export const fetchAutosByIdThunk = createAsyncThunk(
         params: {
           id,
         },
+      });
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchAutosByQueryThunk = createAsyncThunk(
+  "autos/fetchAutosByQuery",
+  async (params, thunkApi) => {
+    try {
+      const { data } = await mockApi.get("advert/", {
+        params,
       });
       return data;
     } catch (error) {

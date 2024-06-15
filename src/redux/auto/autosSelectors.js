@@ -1,4 +1,5 @@
 export const selectCatalog = (state) => state.autos.catalog;
+export const selectRefCatalog = (state) => state.autos.refCatalog;
 export const selectFavorites = (state) => state.autos.favorites;
 export const selectAuto = (state) => state.autos.auto;
 export const selectValue = (state) => state.autos.value;

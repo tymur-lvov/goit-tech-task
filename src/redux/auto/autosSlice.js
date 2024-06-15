@@ -2,15 +2,15 @@ import toast from "react-hot-toast";
 import { createSlice } from "@reduxjs/toolkit";
 
 import {
-  fetchAutosByBrandThunk,
   fetchAutosByIdThunk,
-  fetchAutosByPriceThunk,
+  fetchAutosByQueryThunk,
   fetchCatalogThunk,
   fetchMoreAutosThunk,
 } from "./autosOperations";
 
 const initialState = {
   catalog: [],
+  refCatalog: [],
   favorites: [],
   auto: null,
   value: "",
@@ -40,6 +40,7 @@ const autosSlice = createSlice({
         state.isLimit = false;
         state.isLoading = false;
         state.catalog = payload;
+        state.refCatalog = payload;
       })
       .addCase(fetchCatalogThunk.pending, (state) => {
         state.isLoading = true;
@@ -53,15 +54,12 @@ const autosSlice = createSlice({
         }
         state.catalog = [...state.catalog, ...payload];
       })
-      .addCase(fetchAutosByBrandThunk.fulfilled, (state, { payload }) => {
-        state.catalog = payload;
-      })
-      .addCase(fetchAutosByPriceThunk.fulfilled, (state, { payload }) => {
-        state.catalog = payload;
-      })
       .addCase(fetchAutosByIdThunk.fulfilled, (state, { payload }) => {
         const [auto] = payload;
         state.auto = auto;
+      })
+      .addCase(fetchAutosByQueryThunk.fulfilled, (state, { payload }) => {
+        state.catalog = payload;
       });
   },
 });

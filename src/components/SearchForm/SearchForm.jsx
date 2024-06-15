@@ -4,23 +4,21 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import CustomSelect from "../CustomSelect/CustomSelect";
 
 import { initialValues } from "../../data/initialValues";
-import { selectCatalog } from "../../redux/auto/autosSelectors";
+import { selectRefCatalog } from "../../redux/auto/autosSelectors";
 import { createPriceOptions } from "../../utils/createPriceOptions";
 import { createBrandOptions } from "../../utils/createBrandOptions";
-import {
-  fetchAutosByBrandThunk,
-  fetchAutosByPriceThunk,
-} from "../../redux/auto/autosOperations";
+import { fetchAutosByQueryThunk } from "../../redux/auto/autosOperations";
 
 import css from "./SearchForm.module.css";
 
 const SearchForm = () => {
-  const catalog = useSelector(selectCatalog);
+  const refCatalog = useSelector(selectRefCatalog);
   const dispatch = useDispatch();
 
   const handleSubmit = (values, action) => {
-    values.brand ? dispatch(fetchAutosByBrandThunk(values.brand)) : null;
-    values.price ? dispatch(fetchAutosByPriceThunk(values.price)) : null;
+    console.log(values);
+
+    dispatch(fetchAutosByQueryThunk(values));
     action.resetForm();
   };
 
@@ -32,18 +30,18 @@ const SearchForm = () => {
             <label className={css.label}>
               Car brand
               <Field
-                name="brand"
+                name="make"
                 component={CustomSelect}
-                options={createBrandOptions(catalog)}
+                options={createBrandOptions(refCatalog)}
                 placeholder="Enter the text"
               />
             </label>
             <label className={css.label}>
               Price / 1 hour
               <Field
-                name="price"
+                name="rentalPrice"
                 component={CustomSelect}
-                options={createPriceOptions(catalog)}
+                options={createPriceOptions(refCatalog)}
                 placeholder="To $"
               />
             </label>
