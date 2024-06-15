@@ -60,6 +60,11 @@ const autosSlice = createSlice({
       })
       .addCase(fetchAutosByQueryThunk.fulfilled, (state, { payload }) => {
         state.catalog = payload;
+      })
+      .addCase(fetchAutosByQueryThunk.rejected, () => {
+        toast("Sorry, no matches... Try again!", {
+          icon: "🤷‍♂️",
+        });
       });
   },
 });

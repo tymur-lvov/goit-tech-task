@@ -15,11 +15,10 @@ const SearchForm = () => {
   const refCatalog = useSelector(selectRefCatalog);
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, action) => {
+  const handleSubmit = (values) => {
     console.log(values);
 
     dispatch(fetchAutosByQueryThunk(values));
-    action.resetForm();
   };
 
   return (
