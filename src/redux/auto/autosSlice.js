@@ -69,7 +69,9 @@ const autosSlice = createSlice({
         state.auto = auto;
       })
       .addCase(fetchAutosByQueryThunk.fulfilled, (state, { payload }) => {
-        payload.length < 12 ? (state.isLimit = true) : null;
+        payload.length < 12 || payload.length > 12
+          ? (state.isLimit = true)
+          : null;
         state.catalog = payload;
       })
       .addCase(fetchAutosByQueryThunk.rejected, () => {

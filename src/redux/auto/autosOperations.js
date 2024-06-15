@@ -68,8 +68,17 @@ export const fetchAutosByQueryThunk = createAsyncThunk(
   async (params, thunkApi) => {
     try {
       const { data } = await mockApi.get("advert/", {
-        params,
+        params: {
+          make: params.make,
+          rentalPrice: params.rentalPrice,
+        },
       });
+      if (params.from || params.to) {
+        const filteredData = data.filter(
+          (auto) => auto.mileage <= params.to && auto.mileage >= params.from
+        );
+        return filteredData;
+      }
       if (params.rentalPrice) {
         return data.filter(
           (auto) =>
