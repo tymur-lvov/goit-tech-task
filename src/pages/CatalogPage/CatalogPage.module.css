@@ -11,4 +11,10 @@
   cursor: pointer;
   display: block;
   margin: 0 auto;
+  transition: color 250ms linear;
+}
+
+.button:hover,
+.button:focus {
+  color: var(--accent-hover);
 }

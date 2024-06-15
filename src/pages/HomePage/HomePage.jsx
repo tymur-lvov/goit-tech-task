@@ -8,7 +8,7 @@ const HomePage = () => {
       <div className={css.wrapper}>
         <div className={css.container}>
           <h1 className={css.title}>
-            Welcome to Car Rent UA, the best Ukrainian car rental company!
+            Welcome to CarRentUA, the best Ukrainian car rental company!
           </h1>
           <Link className={css.link} to="/catalog">
             Browse catalog

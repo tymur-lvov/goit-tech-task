@@ -6,11 +6,13 @@ import {
   fetchAutosByQueryThunk,
   fetchCatalogThunk,
   fetchMoreAutosThunk,
+  fetchRefCatalogThunk,
 } from "./autosOperations";
 
 const initialState = {
   catalog: [],
   refCatalog: [],
+  catalogCount: 0,
   favorites: [],
   auto: null,
   value: "",
@@ -23,6 +25,9 @@ const autosSlice = createSlice({
   name: "autos",
   initialState,
   reducers: {
+    increaseCatalogCount: (state, { payload }) => {
+      state.catalogCount += payload;
+    },
     saveValue: (state, { payload }) => {
       state.value = payload;
     },
@@ -36,17 +41,22 @@ const autosSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchRefCatalogThunk.fulfilled, (state, { payload }) => {
+        state.refCatalog = payload;
+      })
       .addCase(fetchCatalogThunk.fulfilled, (state, { payload }) => {
         state.isLimit = false;
         state.isLoading = false;
         state.catalog = payload;
-        state.refCatalog = payload;
       })
       .addCase(fetchCatalogThunk.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(fetchMoreAutosThunk.fulfilled, (state, { payload }) => {
-        if (payload.length === 0) {
+        if (
+          payload.length === 0 ||
+          state.catalogCount === state.refCatalog.length
+        ) {
           state.isLimit = true;
           toast("Sorry, that's all we got!", {
             icon: "🤷‍♂️",
@@ -59,6 +69,7 @@ const autosSlice = createSlice({
         state.auto = auto;
       })
       .addCase(fetchAutosByQueryThunk.fulfilled, (state, { payload }) => {
+        payload.length < 12 ? (state.isLimit = true) : null;
         state.catalog = payload;
       })
       .addCase(fetchAutosByQueryThunk.rejected, () => {
@@ -69,6 +80,10 @@ const autosSlice = createSlice({
   },
 });
 
-export const { addToFavorites, removeFromFavorites, saveValue } =
-  autosSlice.actions;
+export const {
+  addToFavorites,
+  removeFromFavorites,
+  saveValue,
+  increaseCatalogCount,
+} = autosSlice.actions;
 export const autosReducer = autosSlice.reducer;

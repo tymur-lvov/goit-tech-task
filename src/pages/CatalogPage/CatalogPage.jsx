@@ -5,15 +5,17 @@ import Loader from "../../components/Loader/Loader";
 import CardsList from "../../components/CardsList/CardsList";
 import SearchForm from "../../components/SearchForm/SearchForm";
 
-import {
-  fetchCatalogThunk,
-  fetchMoreAutosThunk,
-} from "../../redux/auto/autosOperations";
+import { increaseCatalogCount } from "../../redux/auto/autosSlice";
 import {
   selectCatalog,
   selectIsLimit,
   selectIsLoading,
 } from "../../redux/auto/autosSelectors";
+import {
+  fetchCatalogThunk,
+  fetchMoreAutosThunk,
+  fetchRefCatalogThunk,
+} from "../../redux/auto/autosOperations";
 
 import css from "./CatalogPage.module.css";
 
@@ -25,11 +27,14 @@ const CatalogPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(increaseCatalogCount(12));
+    dispatch(fetchRefCatalogThunk());
     dispatch(fetchCatalogThunk());
   }, [dispatch]);
 
   const handleLoadMoreClick = () => {
     currentPage.current++;
+    dispatch(increaseCatalogCount(12));
     dispatch(fetchMoreAutosThunk(currentPage.current));
   };
 

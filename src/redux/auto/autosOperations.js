@@ -2,6 +2,17 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { mockApi } from "../../services/mockApi";
 
+export const fetchRefCatalogThunk = createAsyncThunk(
+  "autos/fetchRefCatalog",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await mockApi.get("advert/");
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
 export const fetchCatalogThunk = createAsyncThunk(
   "autos/fetchCatalog",
   async (_, thunkApi) => {
@@ -59,6 +70,13 @@ export const fetchAutosByQueryThunk = createAsyncThunk(
       const { data } = await mockApi.get("advert/", {
         params,
       });
+      if (params.rentalPrice) {
+        return data.filter(
+          (auto) =>
+            +auto.rentalPrice.slice(1, auto.rentalPrice.length) <=
+            +params.rentalPrice
+        );
+      }
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

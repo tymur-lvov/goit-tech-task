@@ -3,9 +3,13 @@
   display: flex;
   flex-wrap: wrap;
   gap: 25px 14px;
-
   margin: 0 auto;
   margin-bottom: 100px;
+}
+
+.list:hover,
+.list:focus {
+  color: var(--accent-hover);
 }
 
 @media only screen and (min-width: 768px) {
