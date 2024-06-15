@@ -67,3 +67,19 @@ export const fetchAutosByPriceThunk = createAsyncThunk(
     }
   }
 );
+
+export const fetchAutosByIdThunk = createAsyncThunk(
+  "autos/fetchAutosByIdThunk",
+  async (id, thunkApi) => {
+    try {
+      const { data } = await mockApi.get("advert/", {
+        params: {
+          id,
+        },
+      });
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

@@ -33,7 +33,6 @@ const CatalogPage = () => {
   }, [catalog.length, refCatalog.length, dispatch]);
 
   const handleLoadMoreClick = () => {
-    currentPage.current++;
     dispatch(fetchMoreAutosThunk(currentPage.current));
   };
 

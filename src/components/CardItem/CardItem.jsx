@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useSelector } from "react-redux";
+import { AiTwotoneHeart } from "react-icons/ai";
 
-import imageUrl from "../../assets/icons/icons.svg";
 import { selectFavorites } from "../../redux/auto/autosSelectors";
 import { sliceCity, sliceCountry } from "../../utils/sliceAddress";
 
@@ -9,6 +9,7 @@ import css from "./CardItem.module.css";
 
 const CardItem = ({ auto, handleClick }) => {
   const favorites = useSelector(selectFavorites);
+  const { toggleAddToFavoritesClick, handleLearnMoreClick } = handleClick;
   const {
     img,
     id,
@@ -23,22 +24,17 @@ const CardItem = ({ auto, handleClick }) => {
     photoLink,
   } = auto;
 
-  const { toggleAddToFavoritesClick, handleLearnMoreClick } = handleClick;
-
   return (
     <>
       <div className={css.thumb}>
         <img src={photoLink || img} alt={`${make} ${model}`} />
-        <svg
+        <AiTwotoneHeart
           className={clsx(css.icon, {
             [css.active]: favorites.some((auto) => auto.id === id),
           })}
           onClick={() => toggleAddToFavoritesClick(id)}
-          height={18}
-          width={18}
-        >
-          <use href={`${imageUrl}#icon-heart`}></use>
-        </svg>
+          size={18}
+        />
       </div>
       <div className={css.content_wrapper}>
         <div className={css.title_wrapper}>

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import {
   fetchAutosByBrandThunk,
+  fetchAutosByIdThunk,
   fetchAutosByPriceThunk,
   fetchCatalogThunk,
   fetchMoreAutosThunk,
@@ -12,6 +13,7 @@ const initialState = {
   catalog: [],
   favorites: [],
   refCatalog: [],
+  auto: null,
   value: "",
   isLimit: false,
   isLoading: false,
@@ -58,6 +60,10 @@ const autosSlice = createSlice({
       })
       .addCase(fetchAutosByPriceThunk.fulfilled, (state, { payload }) => {
         state.catalog = payload;
+      })
+      .addCase(fetchAutosByIdThunk.fulfilled, (state, { payload }) => {
+        const [auto] = payload;
+        state.auto = auto;
       });
   },
 });
