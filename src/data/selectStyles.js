@@ -40,13 +40,14 @@ export const selectStyles = {
   indicatorSeparator: () => ({
     display: "none",
   }),
-  dropdownIndicator: () => ({
+  dropdownIndicator: (_, state) => ({
     height: 20,
     width: 20,
     position: "absolute",
     cursor: "pointer",
     top: 14,
     right: 14,
+    transform: state.isFocused ? "rotate(180deg)" : null,
   }),
   menu: (baseStyles) => ({
     ...baseStyles,
