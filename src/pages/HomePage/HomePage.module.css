@@ -17,7 +17,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
   border-radius: 16px;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -60,9 +60,18 @@
   font-size: 12px;
   line-height: 150%;
 
+  outline: none;
   border: 1px solid var(--accent-text);
   border-radius: 12px;
   padding: 10px 14px;
+  transition: background-color 250ms linear, border-color 250ms linear,
+    color 250ms linear;
+}
+
+.link:hover,
+.link:focus {
+  color: #ffdd00;
+  border-color: #ffdd00;
 }
 
 @media only screen and (min-width: 1280px) {

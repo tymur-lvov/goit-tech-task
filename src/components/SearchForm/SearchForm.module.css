@@ -73,7 +73,14 @@
   cursor: pointer;
   border-radius: 12px;
   padding: 14px 44px;
+
   margin-top: 7px;
+  transition: background-color 250ms linear;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--accent-hover);
 }
 
 @media only screen and (min-width: 768px) {
